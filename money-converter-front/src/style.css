@@ -17,7 +17,9 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
-
+input{
+  color: #1a1a1a!important;
+}
 a {
   font-weight: 500;
   color: #646cff;
@@ -75,15 +77,3 @@ button:focus-visible {
   height: calc(100vh - 4rem);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}

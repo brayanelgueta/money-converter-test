@@ -14,35 +14,42 @@ const data = computed(() => {
 let loading = ref(false)
 
 const formatDate = (date) => {
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-    return new Date(date).toLocaleDateString('es-CL', options).split('/').reverse().join('-');
+    const [year, month, day] = date.split('-')
+    return `${day}-${month}-${year}`;
 };
 const handleSubmit = async () => {
+
+
     loading.value = true
     const newData = {
         date: data.value.date ? formatDate(data.value.date) : new Date().toLocaleDateString('es-CL', { day: 'numeric', month: 'numeric', year: 'numeric' }),
         value: data.value.value
     }
     await converterStore.getConvertion(newData)
-    .then(() => {
-        loading.value = false
-    })
+        .then(() => {
+            loading.value = false
+        })
 
 }
 </script>
 
 <template>
     <div class="flex flex-col w-[40%] justify-center items-center gap-6 h-full bg-zinc-900 rounded-xl shadow-xl">
-        
-        <label for="" class="flex justify-start text-2xl font-medium leading-6 text-gray-200">Fecha</label>
-        <input type="date" class="p-2 block w-[15rem] rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" v-model="data.date">
-        <label class="flex justify-start text-2xl font-medium leading-6 text-gray-200">UF</label>
-        <input type="number" class="p-2 block w-[15rem] rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" v-model="data.value">
 
-        <button @click="handleSubmit" class="flex w-[15rem] h-[2.5rem] justify-center items-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2" :disabled="loading">
-            <svg v-if="loading == true" aria-hidden="true" role="status"
-                class="inline w-4 h-4 text-gray-200 animate-spin dark:text-gray-600" viewBox="0 0 100 101" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+        <label for="" class="flex justify-start text-2xl font-medium leading-6 text-gray-200">Fecha</label>
+        <input type="date"
+            class="p-2 block w-[15rem] rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            v-model="data.date">
+        <label class="flex justify-start text-2xl font-medium leading-6 text-gray-200">UF</label>
+        <input type="number"
+            class="p-2 block w-[15rem] rounded-md border-0 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            v-model="data.value">
+
+        <button @click="handleSubmit"
+            class="flex w-[15rem] h-[2.5rem] justify-center items-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 bg-[#646cff]"
+            :disabled="loading">
+            <svg v-if="loading == true" aria-hidden="true" role="status" class="inline w-4 h-4 animate-spin text-gray-600"
+                viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
                     fill="currentColor" />
@@ -55,5 +62,4 @@ const handleSubmit = async () => {
             </template>
         </button>
 
-    </div>
-</template>
+</div></template>

@@ -31,7 +31,7 @@ const getConvertion = async (req, res) => {
       originValue: value,
       convertionDate: date,
       moneyValue: response.data.serie[0].valor,
-      convertionValue: Math.ceil(newValue),
+      convertionValue: Math.round(newValue),
     });
   
      await register.save();
@@ -40,7 +40,7 @@ const getConvertion = async (req, res) => {
         value: value,
         date: date,
         moneyValue: response.data.serie[0].valor,
-        totalAmount: Math.ceil(newValue)
+        totalAmount: Math.round(newValue)
      }
     res.send(result);
   } catch (e) {
