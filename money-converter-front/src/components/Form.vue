@@ -34,7 +34,7 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-    <div class="flex flex-col w-[40%] justify-center items-center gap-6 h-full bg-zinc-900 rounded-xl shadow-xl">
+    <div class="flex flex-col md:w-[40%] justify-center items-center gap-6 md:h-full py-6 bg-zinc-900 rounded-xl shadow-xl mb-4 md:m-0">
 
         <label for="" class="flex justify-start text-2xl font-medium leading-6 text-gray-200">Fecha</label>
         <input type="date"
