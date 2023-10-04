@@ -5,7 +5,7 @@ const User = require("../models/user");
 const History = require("../models/history");
 
 const getHistory = async (req, res) => {
-  res.send(await History.find());
+  res.send(await History.find().sort({ createdAt: -1 }));
 };
 
 const getConvertion = async (req, res) => {

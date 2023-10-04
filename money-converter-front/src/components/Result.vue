@@ -1,7 +1,7 @@
 <script setup>
 import { useConverterStore } from '../stores/converter';
 import { useAuthStore } from '../stores/auth';
-import {computed} from 'vue'
+import { computed } from 'vue'
 
 const converterStore = useConverterStore()
 const authStore = useAuthStore()
@@ -16,21 +16,47 @@ const user = computed(() => {
 </script>
 
 <template>
-    <div class="flex flex-col w-[40%] justify-center items-center gap-6 bg-gray-700 h-[25rem] rounded-xl relative">
-        <div class="absolute top-0 left-0 bg-gray-400 w-full rounded-t-xl h-[3rem] flex items-center justify-center text-xl font-bold">
-            Conversión
-        </div>
+    <div class="flex flex-col  w-[40%] justify-around items-center gap-6 h-[25rem] bg-zinc-900 rounded-xl shadow-xl">
 
-        <div class="flex flex-col items-start text-xl">
-            <label for="">Monto Conversión: {{ convertion.value }}</label>
-            <label for=""> Fecha de Conversión:{{ convertion.date }}</label>
-            <label for="">Valor moneda: {{ convertion.moneyValue}}</label>
-            <label for="">Monto: {{ convertion.totalAmount }}</label>
+
+        <div class="flex items-center justify-between text-xl gap-4">
+            <div class="flex flex-col gap-2">
+                <label for="" class="flex justify-start text-2xl font-medium leading-6 text-gray-200">Monto
+                    Conversión:</label>
+                <label for="" class="flex justify-start text-2xl font-medium leading-6 text-gray-200">{{ convertion.value
+                }} UF</label>
+                <label for="" class="flex justify-start text-2xl font-medium leading-6 text-gray-200">Fecha de
+                    Conversión:</label>
+                <label for="" class="flex justify-start text-2xl font-medium leading-6 text-gray-200">{{ convertion.date
+                }}</label>
+            </div>
+            <div class="flex flex-col gap-2">
+                <label for="" class="flex justify-start text-2xl font-medium leading-6 text-gray-200">Valor moneda:</label>
+                <label for="" class="flex justify-start text-2xl font-medium leading-6 text-gray-200">{{
+                    convertion.moneyValue.toLocaleString("es-CL", {
+                        style: "currency",
+                        currency: "CLP"
+                    }) }}</label>
+                <label for="" class="flex justify-start text-2xl font-medium leading-6 text-gray-200">Monto:</label>
+                <label for="" class="flex justify-start text-2xl font-medium leading-6 text-gray-200">{{
+                    convertion.totalAmount.toLocaleString("es-CL", {
+                        style: "currency",
+                        currency: "CLP"
+                    }) }}</label>
+            </div>
+
+
+
         </div>
         <template v-if="user == 'admin'">
-            <button>
-                <RouterLink to="history">Ver Historial</RouterLink>
-            </button>
+
+            <RouterLink to="history">
+                <button
+                    class="flex w-[15rem] h-[2.5rem] justify-center items-center rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
+                    Ver Historial
+                </button>
+            </RouterLink>
+
         </template>
     </div>
 </template>

@@ -35,11 +35,13 @@ const login = async (req, res) => {
   });
 
   if (!user) {
-    return res.status(404).send({ message: "User not found" });
+    return res.send({ 
+      status: 404,
+      message: "User not found" });
   }
 
   if (!(await bcrypt.compare(req.body.password, user.password))) {
-    return res.status(400).send({ message: "Invalid Credentials" });
+    return res.send({ status: 400, message: "Invalid Credentials" });
   }
 
   //secret deberia estar en el .env
@@ -61,6 +63,7 @@ const login = async (req, res) => {
   });
 
   res.send({
+    status: '200',
     access_token: token,
     user: user.username,
     userType: user.userType

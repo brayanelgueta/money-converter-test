@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { useAuthStore } from "../stores/auth";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -6,6 +7,7 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
+      meta: { requiresAuth: true },
       component: () => import("../views/Home.vue"),
     },
     {
@@ -31,9 +33,22 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import("../views/History.vue"),
-      meta: { requiresAuth: false },
+      meta: { requiresAuth: true },
     }
   ],
 });
 
+router.beforeEach((to, from, next) => {
+
+  const authStore = useAuthStore()
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (authStore.isAuthenticated) {
+      next();
+    } else {
+      next({ name: "login" });
+    }
+  } else {
+    next();
+  }
+});
 export default router;

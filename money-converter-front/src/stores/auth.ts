@@ -62,7 +62,10 @@ export const useAuthStore = defineStore("auth", {
         this.accessToken = data.access_token;
         this.username = data.user
         this.userType = data.userType
-      } catch (error) {}
+        return data
+      } catch (error) {
+        console.log(error)
+      }
     },
     async refresh() {
       try {

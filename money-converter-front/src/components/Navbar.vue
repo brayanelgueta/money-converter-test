@@ -23,7 +23,7 @@ const logout = async () => {
 </script>
 
 <template >
-  <div class="absolute left-0 top-0 bg-black w-full h-[4rem] px-4 flex justify-between">
+  <div class="absolute left-0 top-0 bg-zinc-900 w-full h-[4rem] px-4 flex justify-between">
     <ul class="flex justify-end items-center h-full gap-4">
         <li>
           <RouterLink to="/">Converter</RouterLink>
